@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Employee List</title>
+</head>
+<body>
+  <h1>Employee List</h1>
+  <table border="1" id="empTable">
+    <thead>
+      <tr>
+        <th>Emp ID</th>
+        <th>Name</th>
+        <th>Department ID</th>
+        <th>DOJ</th>
+        <th>Email</th>
+        <th>Phone</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    fetch("http://127.0.0.1:8000/employees")
+      .then(response => response.json())
+      .then(data => {
+        const tbody = document.querySelector("#empTable tbody");
+        alert(data);
+        data.forEach(emp => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td>${emp.emp_id}</td>
+            <td>${emp.name}</td>
+            <td>${emp.dept_id}</td>
+            <td>${emp.doj}</td>
+            <td>${emp.email}</td>
+            <td>${emp.phone}</td>
+          `;
+          tbody.appendChild(row);
+        });
+      });
+  </script>
+</body>
+</html>
